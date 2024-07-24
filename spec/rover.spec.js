@@ -20,13 +20,12 @@ describe("Rover class", function () {
 });
 
 //TEST 8
-
 describe("Rover message contains name", function () {
   test("response returned by receiveMessage contains the name of the message", function () {
 
-    let messageName = 'Test message';
+    let messageName = 'Test for neme message';
     let message = new Message(messageName, []);
-    let rover = new Rover(0);
+    let rover = new Rover(98382);
     let response = rover.receiveMessage(message);
 
     expect(response.message).toEqual(messageName);
@@ -34,4 +33,22 @@ describe("Rover message contains name", function () {
   });
 
 });
+
+//TEST 9
+describe("Rover message contains two commands", function () {
+  test("response returned by receiveMessage includes two results if two commands are sent in the message", function () {
+
+    let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
+    let message = new Message('Test message with two commands', commands);
+    let rover = new Rover(98382);   
+    let results = rover.receiveMessage(message);
+
+    expect(results.message).toEqual(message.name);
+    expect(results.results).toEqual(message.commands);
+
+  });
+
+});
+
+
 
