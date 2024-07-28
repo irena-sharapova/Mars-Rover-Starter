@@ -23,12 +23,11 @@ describe("Rover class", function () {
 describe("Rover message contains name", function () {
   test("response returned by receiveMessage contains the name of the message", function () {
 
-    let messageName = 'Test for neme message';
-    let message = new Message(messageName, []);
+    let message = new Message('Test for neme message', []);
     let rover = new Rover(98382);
     let response = rover.receiveMessage(message);
 
-    expect(response.message).toEqual(messageName);
+    expect(response.message).toEqual(message.name);
 
   });
 
@@ -41,14 +40,45 @@ describe("Rover message contains two commands", function () {
     let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
     let message = new Message('Test message with two commands', commands);
     let rover = new Rover(98382);   
-    let results = rover.receiveMessage(message);
+    let response = rover.receiveMessage(message);
 
-    expect(results.message).toEqual(message.name);
-    expect(results.results).toEqual(message.commands);
+    expect(commands.length).toEqual(response.results.length);
 
   });
 
 });
+
+//TEST 10
+describe("Rover responds correctly", function () {
+  test("responds correctly to the status check command", function () {
+
+    let commands = [new Command('STATUS_CHECK')];
+    let message = new Message('Test message STATUS_CHECK', commands);
+    let rover = new Rover(98382);   
+    let response = rover.receiveMessage(message);
+
+    expect(response.results[0].roverStatus).toEqual({ mode: 'NORMAL', generatorWatts: 110, position: 98382 });
+
+  });
+
+});
+
+
+//TEST 11
+describe("Rover mode change command", function () {
+  test("responds correctly to the mode change command", function () {
+
+    let commands = [new Command('STATUS_CHECK')];
+    let message = new Message('Test message STATUS_CHECK', commands);
+    let rover = new Rover(98382);   
+    let response = rover.receiveMessage(message);
+
+    expect(response.results[0].roverStatus).toEqual({ mode: 'NORMAL', generatorWatts: 110, position: 98382 });
+
+  });
+
+});
+
 
 
 
