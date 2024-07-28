@@ -33,10 +33,11 @@ class Rover {
             if (currentCommand.value === "NORMAL") {
                this.mode = "NORMAL"
                results.push({ completed: true });
-
             } else if (currentCommand.value === "LOW_POWER") {
                this.mode = "LOW_POWER"
                results.push({ completed: true });
+            } else {
+               results.push({ completed: false });
             }
 
          } else {

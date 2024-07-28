@@ -49,7 +49,7 @@ describe("Rover message contains two commands", function () {
 });
 
 //TEST 10
-describe("Rover responds correctly", function () {
+describe("Rover responds for status check", function () {
   test("responds correctly to the status check command", function () {
 
     let commands = [new Command('STATUS_CHECK')];
@@ -68,16 +68,49 @@ describe("Rover responds correctly", function () {
 describe("Rover mode change command", function () {
   test("responds correctly to the mode change command", function () {
 
-    let commands = [new Command('STATUS_CHECK')];
-    let message = new Message('Test message STATUS_CHECK', commands);
+    let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('MODE_CHANGE', 'NORMAL')];
+    let message = new Message('Test message MODE_CHANGE', commands);
     let rover = new Rover(98382);   
     let response = rover.receiveMessage(message);
 
-    expect(response.results[0].roverStatus).toEqual({ mode: 'NORMAL', generatorWatts: 110, position: 98382 });
+    expect(response.results[0].completed).toEqual(true);
+    expect(response.results[1].completed).toEqual(true);
 
   });
 
 });
+
+
+//TEST 12
+describe("Rover responds false", function () {
+  test("responds with a false completed value when attempting to move in LOW_POWER mode", function () {
+
+    let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('MOVE', 100)];
+    let message = new Message('Test message MODE_CHANGE, LOW_POVER_MOVE_', commands);
+    let rover = new Rover(98382);   
+    let response = rover.receiveMessage(message);
+
+    expect(response.results[0].completed).toEqual(true);
+    expect(response.results[1].completed).toEqual(false);
+    expect(rover.position).toEqual(98382)});
+
+});
+
+
+
+//TEST 13
+describe("Rover update position", function () {
+  test("responds with the position for the move command", function () {
+
+    let commands = [new Command('MOVE', 100)];
+    let message = new Message('Test message MOVE', commands);
+    let rover = new Rover(98382);   
+    let response = rover.receiveMessage(message);
+
+    expect(rover.position).toEqual(100)});
+
+});
+
 
 
 

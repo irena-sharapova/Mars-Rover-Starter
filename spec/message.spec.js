@@ -16,8 +16,8 @@ describe("Message class", function() {
 //TEST 5
 describe("constructor sets name", function() {
     test("constructor correctly set the name property", function() {
-        let newName = new Message('Fox');
-        expect(newName.name).toEqual('Fox');
+        let newName = new Message('Test message name check');
+        expect(newName.name).toEqual('Test message name check');
     });
 
 });
@@ -25,8 +25,8 @@ describe("constructor sets name", function() {
 //TEST 6
 describe("contains a commands array passed into the constructor as the 2nd argument", function() {
     test("confirms that the commands property of a new message object contains the data passed in from the Message", function() {
-        let newName = new Command('Fox', 'run');
-        expect(newName.value).toEqual('run');
+        let newName = new Command('Test message name check', 'MOVE');
+        expect(newName.value).toEqual('MOVE');
   });
 
 });
