@@ -20,7 +20,7 @@ describe("Rover class", function () {
 });
 
 //TEST 8
-describe("Rover message contains name", function () {
+describe("Rover class", function () {
   test("response returned by receiveMessage contains the name of the message", function () {
 
     let message = new Message('Test for neme message', []);
@@ -34,7 +34,7 @@ describe("Rover message contains name", function () {
 });
 
 //TEST 9
-describe("Rover message contains two commands", function () {
+describe("Rover class", function () {
   test("response returned by receiveMessage includes two results if two commands are sent in the message", function () {
 
     let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
@@ -49,7 +49,7 @@ describe("Rover message contains two commands", function () {
 });
 
 //TEST 10
-describe("Rover responds for status check", function () {
+describe("Rover class", function () {
   test("responds correctly to the status check command", function () {
 
     let commands = [new Command('STATUS_CHECK')];
@@ -57,7 +57,7 @@ describe("Rover responds for status check", function () {
     let rover = new Rover(98382);   
     let response = rover.receiveMessage(message);
 
-    expect(response.results[0].roverStatus).toEqual({ mode: 'NORMAL', generatorWatts: 110, position: 98382 });
+    expect(response.results[0]).toEqual(responce.results);
 
   });
 
@@ -65,7 +65,7 @@ describe("Rover responds for status check", function () {
 
 
 //TEST 11
-describe("Rover mode change command", function () {
+describe("Rover class", function () {
   test("responds correctly to the mode change command", function () {
 
     let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('MODE_CHANGE', 'NORMAL')];

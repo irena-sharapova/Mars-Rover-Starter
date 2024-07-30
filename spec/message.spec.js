@@ -25,8 +25,9 @@ describe("constructor sets name", function() {
 //TEST 6
 describe("contains a commands array passed into the constructor as the 2nd argument", function() {
     test("confirms that the commands property of a new message object contains the data passed in from the Message", function() {
-        let newName = new Command('Test message name check', 'MOVE');
-        expect(newName.value).toEqual('MOVE');
+        let commands =  [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('MOVE', 100)];
+        let message = new Message('Test message ', commands);
+        expect(message.commands).toEqual(commands);
   });
 
 });
