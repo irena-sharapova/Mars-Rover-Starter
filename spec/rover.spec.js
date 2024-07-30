@@ -23,7 +23,7 @@ describe("Rover class", function () {
 describe("Rover class", function () {
   test("response returned by receiveMessage contains the name of the message", function () {
 
-    let message = new Message('Test for neme message', []);
+    let message = new Message('Test for name message', []);
     let rover = new Rover(98382);
     let response = rover.receiveMessage(message);
 
@@ -57,7 +57,7 @@ describe("Rover class", function () {
     let rover = new Rover(98382);   
     let response = rover.receiveMessage(message);
 
-    expect(response.results[0]).toEqual(responce.results);
+    expect(response.results[0]).toEqual({completed: true, roverStatus: {mode: 'NORMAL', generatorWatts: 110, position: 98382}});
 
   });
 
@@ -73,8 +73,8 @@ describe("Rover class", function () {
     let rover = new Rover(98382);   
     let response = rover.receiveMessage(message);
 
-    expect(response.results[0].completed).toEqual(true);
-    expect(response.results[1].completed).toEqual(true);
+    expect(response.results[0]).toEqual({completed: true});
+    expect(response.results[1]).toEqual({completed: true});
 
   });
 
@@ -82,7 +82,7 @@ describe("Rover class", function () {
 
 
 //TEST 12
-describe("Rover responds false", function () {
+describe("Rover class", function () {
   test("responds with a false completed value when attempting to move in LOW_POWER mode", function () {
 
     let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('MOVE', 100)];
@@ -90,8 +90,8 @@ describe("Rover responds false", function () {
     let rover = new Rover(98382);   
     let response = rover.receiveMessage(message);
 
-    expect(response.results[0].completed).toEqual(true);
-    expect(response.results[1].completed).toEqual(false);
+    expect(response.results[0]).toEqual({completed: true});
+    expect(response.results[1]).toEqual({completed: false});
     expect(rover.position).toEqual(98382)});
 
 });
@@ -99,7 +99,7 @@ describe("Rover responds false", function () {
 
 
 //TEST 13
-describe("Rover update position", function () {
+describe("Rover class", function () {
   test("responds with the position for the move command", function () {
 
     let commands = [new Command('MOVE', 100)];

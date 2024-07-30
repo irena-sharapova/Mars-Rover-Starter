@@ -13,7 +13,7 @@ describe("Command class", function () {
 });
 
 //TEST 2
-describe("Constructor sets command type", function () {
+describe("Command class", function () {
   test("Constructor contain commandTypein the new object", function () {
     let newObject = new Command('checkWord');
     expect(newObject.commandType).toEqual('checkWord');
@@ -22,7 +22,7 @@ describe("Constructor sets command type", function () {
 });
 
 //TEST 3
-describe("Constructor sets a value passed in as the 2nd argument", function () {
+describe("Command class", function () {
   test("Constructor contain value the new object", function () {
     let newObject = new Command('checkWord', 10);
     expect(newObject.value).toEqual(10);
